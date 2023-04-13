@@ -7,13 +7,14 @@ export class ChatGptService implements OnModuleInit{
     private chatGPTAPI: any;
 
     async onModuleInit() {
-        const chatGPT = await import('chatgpt');
-        this.chatGPTAPI = new chatGPT.ChatGPTAPI(this.options);
+        const {ChatGPTAPI} = await import('chatgpt');
+        this.chatGPTAPI = new ChatGPTAPI(this.options);
     }
 
     constructor(private configService: ConfigService) {
         this.options = {
-            apiKey: this.configService.get('CHATGPT_API_KEY')
+            apiKey: this.configService.get('CHATGPT_API_KEY'),
+            apiBaseUrl: this.configService.get('CHATGPT_API_BASE_URL'),
         }
     }
 
