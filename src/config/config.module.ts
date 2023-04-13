@@ -12,6 +12,7 @@ export class ConfigModule {
   static register(options: ConfigModuleOptions): DynamicModule {
     return {
       module: ConfigModule,
+      global: true,
       providers: [
         {
           provide: CONFIG_OPTIONS,

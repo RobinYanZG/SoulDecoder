@@ -5,7 +5,10 @@ import { ChatGptModule } from './chat-gpt/chat-gpt.module';
 import { ConfigModule } from './config/config.module';
 
 @Module({
-  imports: [ChatGptModule, ConfigModule],
+  imports: [
+      ConfigModule.register({ folder: './config' }),
+      ChatGptModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

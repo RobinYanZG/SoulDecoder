@@ -6,7 +6,7 @@ export class ChatGptController {
     constructor(private readonly chatGptService: ChatGptService ) {}
 
     @Get('/hello')
-    getHello(): string {
+    getHello() {
         return this.chatGptService.getHello();
     }
 }
