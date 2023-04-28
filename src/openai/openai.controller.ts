@@ -1,5 +1,6 @@
-import {Controller, Post} from '@nestjs/common';
+import {Body, Controller, Post} from '@nestjs/common';
 import {OpenaiService} from "./openai.service";
+import {CreateChatCompletionResponse} from "openai";
 
 @Controller('openai')
 export class OpenaiController {
@@ -7,7 +8,10 @@ export class OpenaiController {
     constructor(private openaiService: OpenaiService) {}
 
     @Post('/health')
-    postHello() {
-        return this.openaiService.sendMessage([{role: "user", content: "Hello world"}]);
+    async postHello(@Body() {message}: {message: string}): Promise<string> {
+        let res: CreateChatCompletionResponse;
+        res = await this.openaiService.sendMessage([{role: "user", content: message}]);
+        console.log(res);
+        return res.choices[0].message.content;
     }
 }
